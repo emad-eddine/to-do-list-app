@@ -1,10 +1,12 @@
-import {Tabs} from "expo-router"
+import {Stack, Tabs} from "expo-router"
 import { Colors } from "../../utils/constants"
 import { Ionicons } from '@expo/vector-icons';
 
 function Layout(){
 
     return(
+
+      
         <Tabs screenOptions={{
             tabBarStyle:{
                 backgroundColor: Colors.LIGHT_GREEN,
@@ -29,17 +31,20 @@ function Layout(){
         
         }} >
 
-            <Tabs.Screen name="(all-tasks-tab)/allTasksTab"
-            
+            <Tabs.Screen 
+            name="(all-tasks-tab)/allTasksTab"
+        
             options={{
                 tabBarLabel : "All Tasks",
                 tabBarIcon :({size})=>{
                     return <Ionicons name="pencil" size={size} color={Colors.LIGHT_CYAN} />
                 },
-                headerShown : false
-            }}
+                headerShown : false,
+            }} 
+             />
+
+                
             
-            />
 
 
             <Tabs.Screen name="(priority-tasks-tab)/priorityTasksTab"
@@ -70,7 +75,7 @@ function Layout(){
             
             />
 
-            
+        
 
 
         </Tabs>

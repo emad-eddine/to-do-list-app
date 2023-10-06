@@ -4,7 +4,7 @@ import { allTasksStyle } from './allTasksStyle';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../../utils/constants';
 import TaskItem from '../../../components/TaskItem';
-
+import { Link, useRouter } from 'expo-router';
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -43,7 +43,7 @@ type ItemProps = { title: string };
 
 const allTasksTab = () => {
 
-
+  const router = useRouter()
 
   return (
     <ParentContainer customStyle={allTasksStyle.parentContainer}>
@@ -54,7 +54,7 @@ const allTasksTab = () => {
             <Text style={allTasksStyle.headerStatusText}>3 Tasks</Text>
             <Text style={allTasksStyle.headerStatusText}>1 Top Priority</Text>
           </View>
-          <Pressable style={allTasksStyle.addBtn}>
+          <Pressable style={allTasksStyle.addBtn} onPress={()=>{router.push("/screens/add-task/addTask")}}>
             <Ionicons
               name="md-add-outline"
               size={30}

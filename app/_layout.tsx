@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from "expo-splash-screen"
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 SplashScreen.preventAutoHideAsync()
 
@@ -34,6 +34,12 @@ function layout(){
         <Stack.Screen name='screens/(tabs)' options={{
           headerShown : false 
         }}/>
+
+        <Stack.Screen name ='screens/add-task' options={{
+          headerShown : false
+        }}
+          />
+      
     </Stack>
   )
 }
