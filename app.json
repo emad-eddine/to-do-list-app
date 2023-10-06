@@ -9,7 +9,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/icons/app_icon.png",
-      "resizeMode": "native",
+      "resizeMode": "contain",
       "backgroundColor": "#EDF4F2"
     },
     "assetBundlePatterns": [
