@@ -4,10 +4,8 @@ import { Colors } from "./utils/constants";
 
 
 export const indexStyle =  StyleSheet.create({
-    AndroidSafeArea: {
-    flex: 1,
+    LandingContainer: {
     backgroundColor: Colors.LIGHT_CYAN,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     justifyContent:"center",
     alignItems:"center"
 

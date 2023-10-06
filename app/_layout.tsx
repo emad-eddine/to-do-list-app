@@ -30,6 +30,10 @@ function layout(){
         <Stack.Screen name='index' options={{
             headerShown:false
         }}/>
+
+        <Stack.Screen name='screens/(tabs)' options={{
+          headerShown : false 
+        }}/>
     </Stack>
   )
 }
