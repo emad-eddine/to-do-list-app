@@ -21,18 +21,18 @@ A simple to-do app built with React Native and Expo, inspired by https://dribbbl
 ## Screenshots
 
 ### All Tasks
-![All Tasks Screenshot](/preview/allTasksScreen.png)
+<img src="/preview/allTasksScreen.png" alt="App Screenshot" width="300">
 
 ### Priority Tasks
-![Priority Tasks Screenshot](/preview/topTasksScreen.png)
+<img src="/preview/topTasksScreen.png" alt="App Screenshot" width="300">
 
 ### Completed Tasks
-![Completed Tasks Screenshot](/preview/completedTasksScreen.png)
+<img src="/preview/completedTasksScreen.png" alt="App Screenshot" width="300">
 
 ### Add Tasks
-![Add Tasks Screenshot](/preview/addTaskScreen.png)
+<img src="/preview/addTaskScreen.png" alt="App Screenshot" width="300">
 
 ### Delete Task
-![Delete Task Screenshot](/preview/deleteAlertScreen.png)
+<img src="/preview/deleteAlertScreen.png" alt="App Screenshot" width="300">
 
 
