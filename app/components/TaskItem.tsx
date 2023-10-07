@@ -14,14 +14,15 @@ interface Props{
     isTaskPriority : boolean,
     isTaskCompleted : boolean,
     onPriorityClicked : (value:boolean) =>void,
-    onCompleteClicked : (value : boolean) => void
+    onCompleteClicked : (value : boolean) => void,
+    onTaskLongClicked : ()=>void
 
 }
 
 
 
 
-const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted,onPriorityClicked,onCompleteClicked}) => {
+const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted,onPriorityClicked,onCompleteClicked,onTaskLongClicked}) => {
 
       
   const [isCompleted, setCompleted] = useState<boolean>(isTaskCompleted);
@@ -29,7 +30,7 @@ const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted,onPri
   const [isFull,setFull] = useState<boolean>(false)
 
   return (
-    <View style={allTasksStyle.taskContainer}>
+    <View style={allTasksStyle.taskContainer} >
           <Ionicons
             style={allTasksStyle.iconStyle}
             name={isPriority?"star":"star-outline"}
@@ -40,7 +41,7 @@ const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted,onPri
               onPriorityClicked(!isPriority)
             }}
           />
-          <Text numberOfLines={!isFull?1:99} style={allTasksStyle.taskTitle} onPress={()=>{setFull(!isFull)}}>
+          <Text onLongPress={onTaskLongClicked} numberOfLines={!isFull?1:99} style={allTasksStyle.taskTitle} onPress={()=>{setFull(!isFull)}}>
             {taskName}
           </Text>
           <Checkbox

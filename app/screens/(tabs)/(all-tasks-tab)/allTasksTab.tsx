@@ -5,6 +5,7 @@ import {
   FlatList,
   Platform,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import ParentContainer from '../../../components/SafeAreaViewComponent';
 import { allTasksStyle } from './allTasksStyle';
@@ -15,7 +16,7 @@ import { Link, useRouter } from 'expo-router';
 
 import * as SQLite from 'expo-sqlite';
 import { useEffect, useState, useCallback } from 'react';
-
+import { useIsFocused } from "@react-navigation/core";
 function openDatabase() {
   if (Platform.OS === 'web') {
     return {
@@ -43,6 +44,8 @@ const allTasksTab = () => {
   const router = useRouter();
   const [data, setData] = useState<Array<resultType>>();
   const [priorityTasks, setPriorityTasks] = useState(0);
+
+  
 
   function showData() {
     db.transaction(
@@ -134,15 +137,58 @@ const allTasksTab = () => {
     );
   }
 
-  useEffect(() => {
-    if (!data) {
-      showData();
-    }
+   const isFocused = useIsFocused();
 
-    if (data) {
-      getTopPriority();
+  useEffect(() => {
+    if (isFocused) {
+     
+    if(!data){
+showData();
     }
-  }, [data]);
+    if(data){
+getTopPriority();
+    }
+    
+    
+
+   
+    }
+  }, [isFocused,data]);
+
+   function removeTask(id: number) {
+   
+
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          `Delete from tasks_table where id=(?)`,
+          [id]
+        );
+      },
+      (error) => {
+        console.log(`error occurred ${error}`);
+        return false;
+      }, 
+      () => {
+        console.log(`delete compleyed success`);
+        showData()
+        return true;
+      }
+    );
+  }
+
+
+  const createTwoButtonAlert = (id:number) =>
+    Alert.alert('Delete', 'Delete this task', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => {
+        removeTask(id)
+      }},
+    ]);
 
   return (
     <ParentContainer customStyle={allTasksStyle.parentContainer}>
@@ -193,6 +239,10 @@ const allTasksTab = () => {
                     
                     updateTaskCompleted(value,item.item.id)
                   }}  
+
+                  onTaskLongClicked={()=>{
+                    createTwoButtonAlert(item.item.id)
+                  }}
                    
                 />
               );

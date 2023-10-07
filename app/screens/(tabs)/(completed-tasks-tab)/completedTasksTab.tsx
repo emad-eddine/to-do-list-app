@@ -1,7 +1,7 @@
 import { View, Text, FlatList, ActivityIndicator, Platform } from 'react-native'
 import ParentContainer from '../../../components/SafeAreaViewComponent'
 import SingleTaskItem from '../../../components/SingleTaskItem'
-
+import { useIsFocused } from "@react-navigation/core";
 
 
 import * as SQLite from "expo-sqlite"
@@ -55,15 +55,15 @@ const completedTasksTab = () => {
     );
   }
 
-    useEffect( () => {
-      
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+       showData()
+    }
+  }, [isFocused]);
+
   
-        showData()
-    
-    
-
-  }, []);
-
 
 
   return (

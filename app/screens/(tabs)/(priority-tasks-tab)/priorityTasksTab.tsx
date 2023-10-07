@@ -2,7 +2,7 @@ import { View, Text ,Platform, ActivityIndicator} from 'react-native'
 import ParentContainer from '../../../components/SafeAreaViewComponent'
 import { FlatList } from 'react-native-gesture-handler'
 import SingleTaskItem from '../../../components/SingleTaskItem'
-
+import { useIsFocused } from "@react-navigation/core";
 
 
 import * as SQLite from "expo-sqlite"
@@ -56,14 +56,15 @@ const priorityTasksTab = () => {
     );
   }
 
-    useEffect( () => {
-      
-  
-        showData()
-    
-    
+   const isFocused = useIsFocused();
 
-  }, []);
+  useEffect(() => {
+    if (isFocused) {
+       showData()
+    }
+  }, [isFocused]);
+
+  
 
 
 
