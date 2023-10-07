@@ -1,13 +1,16 @@
 import { View, Text, TextInput, Pressable,Platform } from 'react-native';
 import ParentContainer from '../../components/SafeAreaViewComponent';
 import { styles } from './addTask.style';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Checkbox from 'expo-checkbox';
 import { Colors } from '../../utils/constants';
 import { Ionicons } from '@expo/vector-icons';
 
 
 import * as SQLite from "expo-sqlite"
+import { useRouter } from 'expo-router';
+
+
 
 function openDatabase() {
   if (Platform.OS === "web") {
@@ -29,16 +32,17 @@ const db = openDatabase();
 export default function addTask() {
   const [text, onChangeText] = useState<string>("");
   const [isChecked,setChecked] = useState<boolean>(false);
-
+  const router = useRouter()
 
   useEffect(() => {
 
-    
     db.transaction((tx) => {
       tx.executeSql(
-        "create table if not exists tasks (id integer primary key not null,value text,done boolean,priority boolean);"
+        "create table if not exists tasks_table (id integer primary key not null,value text,done number,priority number);"
       );
     });
+
+   
   }, []);
 
 
@@ -52,7 +56,7 @@ export default function addTask() {
 
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into tasks (value,done,priority) values (?, 0,?)", [task,urgent]);
+        tx.executeSql("insert into tasks_table (value,done,priority) values (?, 0,?)", [task,urgent]);
     },
       (error)=>{
         console.log(`error occurred ${error}`)
@@ -60,6 +64,7 @@ export default function addTask() {
       },
       () =>{
         console.log(`${task} added successfully with priority ${urgent}`);
+        router.replace("/screens/(tabs)/(all-tasks-tab)/allTasksTab")
         return true
       }
     );
@@ -69,23 +74,10 @@ export default function addTask() {
 
 }
 
-  function showData(){
-    db.transaction(
-      (tx) => {
-        tx.executeSql('select * from tasks', [], (trans, result) => {
-          console.log(result.rows._array[2])
-        });
-    },
-      (error)=>{
-        console.log(`error occurred ${error}`)
-        return false
-      },
-      () =>{
-        console.log(`success`);
-        return true
-      }
-    );
-  }
+
+
+
+  
 
   return (
     <ParentContainer customStyle={styles.parentContainer}>
@@ -104,17 +96,16 @@ export default function addTask() {
             <Text style={styles.checkText}>Is it Top Priority</Text>
         </View>
 
-        <Pressable style={styles.addBtn} onPress={()=>{addItemToDb(text,isChecked)}}>
+        <Pressable style={styles.addBtn} onPress={()=>{
+
+              addItemToDb(text,isChecked)
+
+        }}>
             <Ionicons
               name="md-add-outline"
               size={30}
               color={Colors.LIGHT_CYAN}
             />
-          </Pressable>
-
-
-          <Pressable style={styles.addBtn} onPress={()=>{showData()}} >
-            <Text>Show</Text>
           </Pressable>
       </View>
     </ParentContainer>

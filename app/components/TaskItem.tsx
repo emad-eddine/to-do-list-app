@@ -12,13 +12,16 @@ interface Props{
 
     taskName : string,
     isTaskPriority : boolean,
-    isTaskCompleted : boolean
+    isTaskCompleted : boolean,
+    onPriorityClicked : (value:boolean) =>void,
+    onCompleteClicked : (value : boolean) => void
 
 }
 
 
 
-const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted}) => {
+
+const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted,onPriorityClicked,onCompleteClicked}) => {
 
       
   const [isCompleted, setCompleted] = useState<boolean>(isTaskCompleted);
@@ -32,7 +35,10 @@ const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted}) => 
             name={isPriority?"star":"star-outline"}
             size={30}
             color={Colors.MEDIUM_YELLOW}
-            onPress={()=>{setPriority(!isPriority)}}
+            onPress={()=>{  
+              setPriority(!isPriority)
+              onPriorityClicked(!isPriority)
+            }}
           />
           <Text numberOfLines={!isFull?1:99} style={allTasksStyle.taskTitle} onPress={()=>{setFull(!isFull)}}>
             {taskName}
@@ -40,7 +46,12 @@ const TaskItem:React.FC<Props> = ({taskName,isTaskPriority,isTaskCompleted}) => 
           <Checkbox
             style={allTasksStyle.checkBoxStyle}
             value={isCompleted}
-            onValueChange={setCompleted}
+            onValueChange={()=>{
+              setCompleted(!isCompleted)
+              onCompleteClicked(!isCompleted)
+            }
+             
+            }
             color={Colors.LIGHT_GREEN}
           />
         </View>
