@@ -1,8 +1,8 @@
 # Simple To-Do App
 
-![App Screenshot](/preview/landingScreen.png)
+<img src="/preview/landingScreen.png" alt="App Screenshot" width="300">
 
-A simple to-do app built with React Native and Expo, inspired by (https://dribbble.com/shots/14176475-Tasky)(link).
+A simple to-do app built with React Native and Expo, inspired by https://dribbble.com/shots/14176475-Tasky.
 
 ## Features
 
@@ -16,7 +16,7 @@ A simple to-do app built with React Native and Expo, inspired by (https://dribbb
 - React Native
 - Expo
 - Expo Router
-- (https://dribbble.com/shots/14176475-Tasky)(link)
+- Design inspired from https://dribbble.com/shots/14176475-Tasky
 
 ## Screenshots
 
@@ -35,9 +35,4 @@ A simple to-do app built with React Native and Expo, inspired by (https://dribbb
 ### Delete Task
 ![Delete Task Screenshot](/preview/deleteAlertScreen.png)
 
-## Getting Started
 
-1. Clone the repository:
-
-   ```shell
-   git clone https://github.com/yourusername/your-repo.git
