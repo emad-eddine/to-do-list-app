@@ -29,7 +29,7 @@ export const allTasksStyle = StyleSheet.create({
         color : Colors.LIGHT_CYAN,
         fontSize : 40,
         marginLeft : 30,
-        flex :1
+        flex :1,
     },
 
     headerStatusContainer:{
@@ -88,7 +88,9 @@ export const allTasksStyle = StyleSheet.create({
         fontSize: 20,
         textAlign : "left",
         padding : 15,
-        textTransform : "capitalize"
+        textTransform : "capitalize",
+        
+        textDecorationColor : Colors.LIGHT_GREEN
     },
 
     iconStyle : {
